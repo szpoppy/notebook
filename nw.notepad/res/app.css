@@ -172,7 +172,7 @@ input.full {
     top: -1px;
     bottom: -1px;
     width: 49px;
-    background-color: #366CB3;
+    background-color: #366cb3;
     z-index: 2;
     overflow: hidden;
     -webkit-app-region: drag;
@@ -201,6 +201,24 @@ input.full {
     color: #ffffff;
     -webkit-app-region: none;
     cursor: pointer;
+}
+
+.la-bar .bottom {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    font-size: 20px;
+    color: #cccccc;
+    text-align: center;
+    -webkit-app-region: none;
+}
+
+.la-bar .bottom .iconfont {
+    cursor: pointer;
+}
+.la-bar .bottom .iconfont:hover {
+    color: #ffffff;
 }
 
 .la-tree {

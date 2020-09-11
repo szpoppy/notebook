@@ -265,6 +265,23 @@ void (function () {
             } else {
                 nWin.maximize()
             }
+        },
+        createQuickStart() {
+            console.log(process)
+            if (window.confirm("即将创建桌面快捷方式，如果已存在，将覆盖。")) {
+                let dir = process.execPath.replace(/[^\/\\]*$/, "")
+                fs.writeFileSync(
+                    path.resolve(process.env.HOME, "Desktop", "nw.nptebookpad.desktop"),
+                    `[Desktop Entry]
+Name=NW笔记本
+Path=${dir}
+Exec=${path.resolve(dir, "nw")}
+Icon=${path.resolve(dir, "icon.svg")}
+Type=Application
+Categories=Office;`,
+                    "utf8"
+                )
+            }
         }
     }
 
