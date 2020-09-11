@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>笔记本</title>
+        <link href="./res/app.css" rel="stylesheet" type="text/css" />
+        <script src="./res/edit.js"></script>
+    </head>
+    <body>
+        <div class="context" id="context">
+            <!-- 系统 关闭 等 -->
+            <div class="la-sys">
+                <i class="iconfont" event="winClose">&#xe801;</i>
+                <i class="iconfont" event="winToggle">&#xe803;</i>
+                <i class="iconfont" event="winMinimize">&#xe802;</i>
+            </div>
+            <!-- 切换库 -->
+            <div class="lib-block" id="lib.block" event="hideLibs">
+                <div class="lib-tree" event="stop">
+                    <div class="lib-title">
+                        <em>
+                            <i class="iconfont" event="addBook">&#xe781;</i>
+                        </em>
+                        <b id="lib.title">笔记选择</b>
+                    </div>
+                    <div class="lib-lis" id="lib.lis"></div>
+                </div>
+            </div>
+            <!-- 左侧 -->
+            <div class="la-bar">
+                <div class="face">
+                    <img src="../icon.svg" />
+                </div>
+                <div class="book">
+                    <i class="iconfont" event="showLibs">&#xe7d8;</i>
+                </div>
+            </div>
+            <!-- 中间 -->
+            <div class="la-tree">
+                <div class="book-title">
+                    <em>
+                        <i class="iconfont" event="addNote">&#xe781;</i>
+                    </em>
+                    <b>
+                        <input class="full" type="text" id="book.title" />
+                    </b>
+                </div>
+                <div class="tree" id="book.tree"></div>
+            </div>
+            <!-- 编辑区域 -->
+            <div class="la-block">
+                <div class="note-title">
+                    <input class="full" id="note.title" type="text" value="" />
+                </div>
+                <div class="note-box" id="note-box"></div>
+            </div>
+        </div>
+        <script src="./res/app.js"></script>
+    </body>
+</html>

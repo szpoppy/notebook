@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>记事本</title>
+    </head>
+    <body>
+        <style>
+            .left-bar {
+                -webkit-app-region: drag;
+                position: fixed;
+                z-index: 2;
+                width: 42px;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                background-color: #010101;
+            }
+
+            .left-bar .bottom {
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+            }
+
+            .left-bar .li {
+                -webkit-app-region: none;
+                margin: 3px;
+                width: 36px;
+                height: 36px;
+                overflow: hidden;
+                text-align: center;
+                border-radius: 6px;
+                opacity: 0.6;
+                cursor: pointer;
+            }
+
+            .left-bar .li:after {
+                display: inline-block;
+                height: 100%;
+                width: 0;
+                vertical-align: middle;
+                content: "";
+            }
+
+            .left-bar .li:hover {
+                background-color: rgba(255, 241, 241, 0.2);
+            }
+
+            .left-bar .li.act,
+            .left-bar .li.act:hover {
+                opacity: 1;
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .left-bar img {
+                width: 28px;
+                vertical-align: middle;
+                display: inline-block;
+            }
+
+            .top-bar {
+                -webkit-app-region: drag;
+                height: 20px;
+                background-color: #f2f3f5;
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                z-index: 1;
+            }
+
+            .context {
+                position: fixed;
+                top: 0;
+                right: 42px;
+                left: 0;
+                bottom: 0;
+                z-index: 3;
+            }
+
+            .context webview,
+            .context iframe {
+                border: none;
+                width: 100%;
+                height: 100%;
+                display: none;
+            }
+
+            .context.iframe iframe,
+            .context.webview webview {
+                display: block;
+            }
+        </style>
+        <!-- <div class="top-bar"></div> -->
+        <div class="left-bar">
+            <!-- <div class="li" onmouseup="win.close()">
+                <img src="./res/close.svg" />
+            </div>
+            <div class="li" onmouseup="win.minimize()">
+                <img src="./res/minimize.svg" />
+            </div> -->
+            <div class="bottom">
+                <div class="li" id="default" src="http://tcoa.17usoft.com/OA/OAIndex" onmouseup="setWebview(this)">
+                    <img src="./res/oa.svg" />
+                </div>
+                <div class="li" src="http://leonidmanager2.17usoft.com/main/tool/resource" onmouseup="setWebview(this)">
+                    <img src="./res/cdn.svg" />
+                </div>
+                <div class="li" src="http://tcwireless.17usoft.com/publish/Hybrid/PackageList" onmouseup="setWebview(this)">
+                    <img src="./res/hybrid.svg" />
+                </div>
+                <div class="li" src="http://train.qa.17usoft.com/rap/org/index.do" onmouseup="setWebview(this)">
+                    <img src="./res/rap.svg" />
+                </div>
+                <div class="li" src="http://train.17usoft.net/trainh5book/" onmouseup="setWebview(this)">
+                    <img src="./res/book.svg" />
+                </div>
+                <div class="li" src="http://jean.corp.elong.com/v2/access/#/plat" onmouseup="setWebview(this)">
+                    <img src="./res/jean.svg" />
+                </div>
+                <div class="li" key="webview" src="http://train.17usoft.net/trainskyzen/index.html#/my-task" onmouseup="setWebview(this)">
+                    <img src="./res/tianchan.svg" />
+                </div>
+                <div class="li" key="webview" src="http://git.17usoft.com" onmouseup="setWebview(this)">
+                    <img src="./res/code.svg" />
+                </div>
+                <div class="li" key="webview" src="http://it.tcent.cn/index/" onmouseup="setWebview(this)">
+                    <img src="./res/it.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="context webview" id="context">
+            <webview partition="trusted" id="webview" name="webv" src=""></webview>
+        </div>
+        <script>
+            let win = nw.Window.get()
+
+            let actDom = null
+            function setWebview(act) {
+                if (actDom) {
+                    actDom.className = "li"
+                }
+                actDom = act
+                actDom.className = "li act"
+                document.getElementById("webview").src = act.getAttribute("src")
+            }
+
+            setWebview(document.getElementById("default"))
+
+            let lastWebSrc = ""
+            document.getElementById("webview").onloadstop = function () {
+                let src = this.src
+
+                let flag = false
+                if (lastWebSrc != src) {
+                    // console.log("=========", src)
+                    lastWebSrc = src
+                    flag = true
+                }
+
+                if (flag || lastWebSrc == "") {
+                    if (src.indexOf(".17usoft.com/oauth/authorize") > 0) {
+                        this.executeScript({
+                            code: `
+                                window.document.getElementById("username").value = "zyf47976";
+                                window.document.getElementById("password").value = "Zyf111112";
+                                window.document.getElementById("autoLogin").checked = true;
+                                var event = document.createEvent('MouseEvents');
+                                event.initMouseEvent('click');
+                                window.document.getElementById("authorityLoginBtn").dispatchEvent(event);
+                            `
+                        })
+                        return
+                    }
+
+                    if (src.indexOf("17usoft.com/users/sign_in") > 0) {
+                        this.executeScript({
+                            code: `
+                                window.document.getElementById("username").value = "zyf47976";
+                                window.document.getElementById("password").value = "Zyf111112";
+                                window.document.getElementById("remember_me").checked = true;
+                                window.document.getElementById("new_ldap_user").submit()
+                            `
+                        })
+                        return
+                    }
+                }
+            }
+
+            document.getElementById("webview").addEventListener("newwindow", function (e) {
+                document.getElementById("webview").src = e.targetUrl
+                // window.open(e.targetUrl)
+            })
+
+            webview.addEventListener("dialog", function (e) {
+                let flag = window[e.messageType](e.messageText)
+                if (flag) {
+                    e.dialog.ok()
+                    return
+                }
+                let fn = e.dialog.cancel || e.dialog.ok
+                fn && fn()
+            })
+        </script>
+    </body>
+</html>

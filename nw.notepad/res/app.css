@@ -1,0 +1,516 @@
+@font-face {
+    font-family: "iconfont";
+    src: url("fonts/iconfont.eot");
+    src: url("fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("fonts/iconfont.woff") format("woff"), url("fonts/iconfont.ttf") format("truetype"), url("fonts/iconfont.svg#iconfont") format("svg");
+}
+
+html,
+body {
+    background: transparent;
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+input.full {
+    border: none;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    /* padding: 0 15px; */
+    font-size: 18px;
+    line-height: normal;
+    font-weight: 600;
+    outline: none;
+}
+
+.context {
+    color: #333333;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: #ffffff;
+    overflow: visible;
+    font-size: 12px;
+    /* border-radius: 4px; */
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.la-sys {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    -webkit-app-region: drag;
+    background-color: transparent;
+}
+
+.la-sys i {
+    -webkit-app-region: none;
+    float: right;
+    cursor: pointer;
+    font-size: 14px;
+    color: #999999;
+    line-height: 20px;
+    padding: 0 6px;
+}
+
+.la-sys i:hover {
+    color: #3b3868;
+}
+
+.lib-block {
+    position: absolute;
+    left: -1px;
+    right: 0;
+    top: -1px;
+    bottom: -1px;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 0;
+    transition: all 300ms ease;
+}
+
+.lib-title {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    padding: 20px 12px 20px 20px;
+    color: #333333;
+    font-size: 18px;
+    height: 60px;
+}
+
+.lib-title b {
+    font-weight: 600;
+}
+
+.lib-title em {
+    float: right;
+    color: #999999;
+}
+
+.lib-title .iconfont {
+    cursor: pointer;
+}
+
+.lib-tree {
+    position: absolute;
+    width: 280px;
+    background-color: #ffffff;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    left: -50px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transition: all 300ms linear;
+    opacity: 0;
+}
+
+.lib-lis {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    width: 100%;
+    overflow: auto;
+}
+
+.lib-li {
+    /* padding: 0 0 0 20px; */
+    line-height: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 10px;
+}
+
+.lib-li i {
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+    color: #cccccc;
+    font-size: 16px;
+}
+.lib-li i.r {
+    float: right;
+}
+.lib-li i.l {
+    float: left;
+}
+
+.lib-li b {
+    font-weight: normal;
+}
+
+.lib-li.act i.l,
+.lib-li.act b {
+    color: #ff7c45;
+}
+
+.lib-block.act {
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.lib-block.act .lib-tree {
+    opacity: 1;
+    left: 48px;
+}
+
+.la-bar {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    bottom: -1px;
+    width: 49px;
+    background-color: #366CB3;
+    z-index: 2;
+    overflow: hidden;
+    -webkit-app-region: drag;
+    /* border-radius: 4px 0 0 4px; */
+}
+
+.la-bar .face {
+    width: 32px;
+    height: 32px;
+    border-radius: 100px;
+    margin: 20px auto 40px auto;
+    overflow: hidden;
+}
+
+.la-bar .face img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.la-bar .book {
+    margin: 20px auto;
+    text-align: center;
+    line-height: 30px;
+    font-size: 24px;
+    color: #ffffff;
+    -webkit-app-region: none;
+    cursor: pointer;
+}
+
+.la-tree {
+    position: absolute;
+    left: 48px;
+    background-color: #ffffff;
+    z-index: 3;
+    border-right: 1px solid #dddddd;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    box-sizing: border-box;
+    /* padding: 0 25px; */
+}
+
+.la-tree .book-title {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    padding: 15px 15px 15px 20px;
+    color: #333333;
+    font-size: 18px;
+    height: 60px;
+    /* background-color: red; */
+    box-sizing: border-box;
+}
+
+.la-tree .book-title b {
+    display: block;
+    height: 30px;
+    margin-right: 30px;
+}
+
+.la-tree .book-title em {
+    float: right;
+    color: #999999;
+}
+
+.la-tree .book-title .iconfont {
+    cursor: pointer;
+}
+
+.la-tree .tree {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    font-size: 14px;
+    padding-right: 10px;
+}
+
+.la-tree .tree .li {
+    padding: 0 0 0 20px;
+    line-height: 20px;
+}
+
+.la-tree .tree .con {
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.la-tree .tree .li i {
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+    color: #cccccc;
+}
+
+.la-tree .tree .li.act i.x {
+    color: #f15a24;
+}
+.la-tree .tree .li.act b {
+    font-weight: 600;
+    color: #f15a24;
+}
+
+.la-tree .tree .li i.x {
+    /* text-align: center; */
+    display: block;
+    float: left;
+}
+
+.la-tree .tree .li i.r {
+    display: block;
+    float: right;
+}
+
+.la-tree .tree .li b {
+    height: 20px;
+    font-weight: normal;
+    display: block;
+    /* padding: 0 0 0 26px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.la-block {
+    position: absolute;
+    left: 328px;
+    background-color: #ffffff;
+    z-index: 3;
+    /* border-right: 1px solid #dddddd; */
+    overflow: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.la-block .note-title {
+    position: absolute;
+    z-index: 2;
+    height: 60px;
+    left: 0;
+    right: 0;
+    padding-left: 15px;
+    border-bottom: 1px solid #dddddd;
+    box-sizing: border-box;
+}
+
+.la-block .note-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    top: 61px;
+    bottom: 0;
+}
+
+/* 富文本编辑器 */
+.WebEdit_Edit {
+    border-collapse: collapse;
+    height: 100%;
+}
+
+.WebEdit_empty1 {
+    float: left;
+    width: 0;
+    height: 24px;
+}
+
+.WebEdit_Edit td {
+}
+.WebEdit_Edit thead td {
+    height: 31px;
+    padding: 8px 5px 8px 5px;
+    z-index: 2;
+    border-bottom: 1px solid #dddddd;
+}
+
+.WebEdit_Edit thead td .WebEdit_abtn {
+    text-decoration: none;
+    display: block;
+    /* background: url(edit.gif) no-repeat; */
+    /* margin-top: 2px; */
+    height: 32px;
+    /* margin-left: 6px; */
+    width: 50px;
+    text-align: center;
+    line-height: 32px;
+    color: #666666;
+    font-size: 26px;
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+a.WebEdit_abtn:hover {
+    color: #f15a24 !important;
+    /* border: solid 1px #999999; */
+    /* margin-bottom: -2px; */
+    /* margin-right: -2px; */
+}
+
+.WebEdit_Edit thead td .WebEdit_a4:before {
+    content: "\e7fc";
+}
+.WebEdit_Edit thead td .WebEdit_a5:before {
+    content: "\e7fa";
+}
+.WebEdit_Edit thead td .WebEdit_a6:before {
+    content: "\e7ff";
+}
+.WebEdit_Edit thead td .WebEdit_a7:before {
+    content: "\e7fd";
+}
+.WebEdit_Edit thead td .WebEdit_a8:before {
+    content: "\e7f9";
+}
+.WebEdit_Edit thead td .WebEdit_a9:before {
+    content: "\e7f8";
+}
+.WebEdit_Edit thead td .WebEdit_a10:before {
+    content: "\e7f7";
+}
+.WebEdit_Edit thead td .WebEdit_a11:before {
+    content: "\e7f6";
+}
+.WebEdit_Edit thead td .WebEdit_a12:before {
+    content: "\e7f5";
+}
+.WebEdit_Edit thead td .WebEdit_a13:before {
+    content: "\e7f3";
+}
+.WebEdit_Edit thead td .WebEdit_a14:before {
+    content: "\e7f4";
+}
+.WebEdit_Edit thead td .WebEdit_a15:before {
+    content: "\e7fb";
+}
+.WebEdit_Edit thead td .WebEdit_a16:before {
+    content: "\e804";
+}
+.WebEdit_Edit thead td .WebEdit_a17:before {
+    content: "\f033";
+}
+.WebEdit_Edit thead td .WebEdit_a18:before {
+    content: "\f033";
+}
+.WebEdit_Edit thead td .WebEdit_a19:before {
+    content: "\f033";
+}
+.WebEdit_Edit thead td .WebEdit_split {
+    display: block;
+    width: 10px;
+    float: left;
+    /* background: url(edit.gif) no-repeat 4px -452px; */
+    height: 18px;
+}
+
+.WebEdit_down {
+    position: absolute;
+    display: none;
+    margin-top: 1px;
+    margin-left: 6px;
+    padding: 3px;
+    border: 1px solid #999999;
+    background-color: #ffffff;
+    z-index: 10;
+}
+.WebEdit_down a {
+    /* *position: relative; */
+    display: block;
+    padding: 2px;
+    text-decoration: none;
+    color: #333333;
+    /* vertical-align: middle; */
+}
+.WebEdit_down a:hover {
+    background-color: #cccccc;
+    text-decoration: none;
+}
+
+.WebEdit_Color {
+    width: 288px;
+    border: 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0px;
+}
+.WebEdit_Color a {
+    width: 16px;
+    height: 16px;
+    float: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0;
+}
+.WebEdit_Color a:hover {
+    position: relative;
+    z-index: 2;
+    /* outline: 2px solid rgba(255, 255, 255, 0.8); */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset;
+    /* border: solid 1px #ffffff; */
+    /* margin-left: -1px;
+    margin-top: -1px; */
+}
+
+.WebEdit_InsertFace {
+    width: 418px;
+}
+.WebEdit_InsertFace a {
+    float: left;
+}
+.WebEdit_InsertFace img {
+    border: 1px solid #999999;
+    display: block;
+}
+
+.WebEdit_left {
+    float: left;
+}
+.WebEdit_HTMLEdit {
+    padding: 0px;
+    margin: 0px;
+    /* height: 280px; */
+    width: 100%;
+    height: 100%;
+}
+.WebEdit_Mask {
+    position: absolute;
+    width: 100%;
+    height: 290px;
+    margin: -290px 0px 0px 0px;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+}

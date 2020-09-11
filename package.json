@@ -1,0 +1,13 @@
+{
+  "name": "nw.notepad.sdk",
+  "version": "0.0.1",
+  "main": "./nw.notepad/index.html",
+  "window": {
+    "frame": false,
+    "transparent": true,
+    "width": 1920,
+    "height": 1080,
+    "position": "center",
+    "icon": "./icon.svg"
+  }
+}
