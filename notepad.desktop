@@ -1,8 +1,0 @@
-[Desktop Entry]
-Categories=Office;
-Exec=./nw
-Icon=./icon.svg
-Name=笔记本
-Path=./
-Type=Application
-X-Deepin-Vendor=user-custom
