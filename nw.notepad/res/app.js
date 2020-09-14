@@ -22,7 +22,7 @@ void (function () {
     const rootDir = process.execPath.replace(/[^\/\\]*$/, "nw.data")
 
     function getPath(...arg) {
-        console.log("arg", arg)
+        // console.log("arg", arg)
         return path.resolve(...[rootDir].concat(arg))
     }
 
@@ -54,6 +54,7 @@ void (function () {
     // 读取目录
     function readBooks() {
         let getBookDir = getPath("book.json")
+        console.log("getBookDir", getBookDir)
         let books = []
         try {
             books = require(getBookDir).tree
@@ -130,6 +131,7 @@ void (function () {
             bookIds.splice(bookIds.indexOf(book.id), 1)
 
             removeBookDir(getPath(book.id))
+            saveBooks()
 
             if (bookIds.length == 0) {
                 bookIds.push(createBook("默认笔记本"))
