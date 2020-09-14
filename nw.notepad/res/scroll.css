@@ -1,0 +1,26 @@
+/* 滚动条整体宽度 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+}
+/* 滚动条滑槽样式 */
+::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3); */
+    border-radius: 10px;
+}
+/* 滚动条样式 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #ddd;
+    /* box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2); */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #999;
+}
+/* 浏览器失焦的样式 */
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(54, 108, 179, 0.2);
+}

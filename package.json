@@ -1,5 +1,5 @@
 {
-  "name": "nw.notepad.sdk",
+  "name": "nw.notebookpad.sdk",
   "version": "0.0.1",
   "main": "./nw.notepad/index.html",
   "window": {

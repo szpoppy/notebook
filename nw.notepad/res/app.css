@@ -26,6 +26,7 @@ input.full {
     line-height: normal;
     font-weight: 600;
     outline: none;
+    background-color: #f2f3f5;
 }
 
 .context {
@@ -36,7 +37,7 @@ input.full {
     top: 0;
     bottom: 0;
     z-index: 1;
-    background-color: #ffffff;
+    background-color: #f2f3f5;
     overflow: visible;
     font-size: 12px;
     /* border-radius: 4px; */
@@ -107,7 +108,7 @@ input.full {
 .lib-tree {
     position: absolute;
     width: 280px;
-    background-color: #ffffff;
+    background-color: #f2f3f5;
     overflow: hidden;
     top: 0;
     bottom: 0;
@@ -198,7 +199,7 @@ input.full {
     text-align: center;
     line-height: 30px;
     font-size: 24px;
-    color: #ffffff;
+    color: #f2f3f5;
     -webkit-app-region: none;
     cursor: pointer;
 }
@@ -218,13 +219,13 @@ input.full {
     cursor: pointer;
 }
 .la-bar .bottom .iconfont:hover {
-    color: #ffffff;
+    color: #f2f3f5;
 }
 
 .la-tree {
     position: absolute;
     left: 48px;
-    background-color: #ffffff;
+    background-color: #f2f3f5;
     z-index: 3;
     border-right: 1px solid #dddddd;
     overflow: hidden;
@@ -323,7 +324,7 @@ input.full {
 .la-block {
     position: absolute;
     left: 328px;
-    background-color: #ffffff;
+    background-color: #f2f3f5;
     z-index: 3;
     /* border-right: 1px solid #dddddd; */
     overflow: auto;
@@ -378,13 +379,13 @@ input.full {
     display: block;
     /* background: url(edit.gif) no-repeat; */
     /* margin-top: 2px; */
-    height: 32px;
+    height: 20px;
     /* margin-left: 6px; */
     width: 50px;
     text-align: center;
-    line-height: 32px;
+    line-height: 20px;
     color: #666666;
-    font-size: 26px;
+    font-size: 20px;
     font-family: "iconfont" !important;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
@@ -456,11 +457,11 @@ a.WebEdit_abtn:hover {
 .WebEdit_down {
     position: absolute;
     display: none;
-    margin-top: 1px;
-    margin-left: 6px;
+    margin-top: -3px;
+    margin-left: -30px;
     padding: 3px;
-    border: 1px solid #999999;
-    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f2f3f5;
     z-index: 10;
 }
 .WebEdit_down a {
@@ -498,7 +499,7 @@ a.WebEdit_abtn:hover {
     z-index: 2;
     /* outline: 2px solid rgba(255, 255, 255, 0.8); */
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset;
-    /* border: solid 1px #ffffff; */
+    /* border: solid 1px #F2F3F5; */
     /* margin-left: -1px;
     margin-top: -1px; */
 }
@@ -523,6 +524,8 @@ a.WebEdit_abtn:hover {
     /* height: 280px; */
     width: 100%;
     height: 100%;
+    /* border-bottom: 1px solid #dddddd; */
+    background-color: #ffffff;
 }
 .WebEdit_Mask {
     position: absolute;

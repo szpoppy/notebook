@@ -19,15 +19,16 @@ void (function () {
     const fs = require("fs")
     const path = require("path")
 
-    const rootDir = process.execPath.replace(/[^\/\\]*$/, path.join("nw.notepad", "data"))
+    const rootDir = process.execPath.replace(/[^\/\\]*$/, "nw.data")
 
     function getPath(...arg) {
+        console.log("arg", arg)
         return path.resolve(...[rootDir].concat(arg))
     }
 
     function getUUID() {
         let t = new Date().getTime() - 1599783690695
-        return parseInt(Math.floor(Math.random() * 100) + "" + t).toString(36)
+        return parseInt(`${t}${Math.floor(Math.random() * 100)}`).toString(36)
     }
 
     let curBook = {}
@@ -52,13 +53,17 @@ void (function () {
 
     // 读取目录
     function readBooks() {
-        // 读取目录中的所有文件/目录
-        let paths = fs.readdirSync(rootDir) || []
-        if (paths.length == 0) {
-            paths.push(createBook("默认笔记本"))
-        }
+        let getBookDir = getPath("book.json")
+        let books = []
+        try {
+            books = require(getBookDir).tree
+        } catch (e) {}
+        console.log("books", books)
+        return books
+    }
 
-        return paths
+    function saveBooks() {
+        fs.writeFile(getPath("book.json"), JSON.stringify({ tree: bookIds }), "utf8", function () {})
     }
 
     // 所有书本id
@@ -141,7 +146,15 @@ void (function () {
         let bookId = curBook.id
         let noteId = curNote.id
         if (bookId && noteId) {
-            fs.writeFileSync(getPath(bookId, noteId + ".html"), WebEdit.getHTML(), "utf8")
+            let html = WebEdit.getHTML()
+            fs.writeFile(getPath(bookId, noteId + ".html"), html, "utf8", function () {})
+            // console.log(noteId, curBook)
+            if (noteId && curBook.tree.length > 1 && curBook.tree[0] != noteId) {
+                let index = curBook.tree.indexOf(noteId)
+                curBook.tree.unshift(...curBook.tree.splice(index, 1))
+                saveCurBook()
+                reSetBookTree()
+            }
         }
     }
 
@@ -153,7 +166,7 @@ void (function () {
     }
 
     function saveCurBook() {
-        fs.writeFileSync(getPath(curBook.id, "index.json"), JSON.stringify(curBook), "utf8")
+        fs.writeFile(getPath(curBook.id, "index.json"), JSON.stringify(curBook), "utf8", function () {})
     }
 
     function createNote(title) {
@@ -190,9 +203,9 @@ void (function () {
 
     let ppEventFn = {
         electNote(event, id) {
-            // console.log("event", event)
-            saveNote()
+            event.stopPropagation()
             electNote(id)
+            return true
         },
         addNote() {
             createNote("新建笔记")
@@ -267,10 +280,10 @@ void (function () {
             }
         },
         createQuickStart() {
-            console.log(process)
+            // console.log(process)
             if (window.confirm("即将创建桌面快捷方式，如果已存在，将覆盖。")) {
                 let dir = process.execPath.replace(/[^\/\\]*$/, "")
-                fs.writeFileSync(
+                fs.writeFile(
                     path.resolve(process.env.HOME, "Desktop", "nw.nptebookpad.desktop"),
                     `[Desktop Entry]
 Name=NW笔记本
@@ -279,7 +292,8 @@ Exec=${path.resolve(dir, "nw")}
 Icon=${path.resolve(dir, "icon.svg")}
 Type=Application
 Categories=Office;`,
-                    "utf8"
+                    "utf8",
+                    function () {}
                 )
             }
         }
@@ -321,8 +335,12 @@ Categories=Office;`,
         }
     }
     document.onkeydown = keyDownEventFn
-
     WebEdit.iframeWin.addEventListener("keydown", keyDownEventFn, false)
+
+    document.onclick = function () {
+        // 每次点击，都自动保存
+        saveNote()
+    }
 
     // 标题更新
     $("note.title").onblur = function () {
@@ -337,5 +355,11 @@ Categories=Office;`,
     $("book.title").onblur = function () {
         curBook.title = this.value.trim()
         saveCurBook()
+
+        if (bookIds.length > 1 && bookIds[0] != curBook.id) {
+            let index = bookIds.indexOf(curBook.id)
+            bookIds.unshift(...bookIds.splice(index, 1))
+            saveBooks()
+        }
     }
 })()

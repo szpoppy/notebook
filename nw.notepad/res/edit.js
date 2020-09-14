@@ -61,7 +61,7 @@ void (function () {
                           ]
                 htmls.push(t.join(""))
             }
-            htmls.push(["</td>", "</tr>", "</thead>", "<tbody>", "<tr>", "<td>", '<iframe width="100%" name="WebEdit_HTMLEdit" id="WebEdit_HTMLEdit" class="WebEdit_HTMLEdit" frameBorder="0" marginHeight="15" marginWidth="15"></iframe>', "</td>", "</tr>", "</tbody>", "</table>"].join(""))
+            htmls.push(["</td>", "</tr>", "</thead>", "<tbody>", "<tr>", "<td>", '<iframe width="100%" allowtransparency="true" name="WebEdit_HTMLEdit" id="WebEdit_HTMLEdit" class="WebEdit_HTMLEdit" frameBorder="0" marginHeight="15" marginWidth="15"></iframe>', "</td>", "</tr>", "</tbody>", "</table>"].join(""))
             cot = $(cot)
             cot.innerHTML = htmls.join("")
             let tags = cot.getElementsByTagName("*")
@@ -85,6 +85,8 @@ void (function () {
 
             this.iframe = window.frames["WebEdit_HTMLEdit"]
             this.iframe.document.designMode = "on"
+            this.iframe.document.getElementsByTagName("head")[0].innerHTML = '<link href="./res/scroll.css" rel="stylesheet" type="text/css" />'
+
             this.iframeWin = $("WebEdit_HTMLEdit").contentWindow
             //window obblur
             //FF
