@@ -19,3 +19,7 @@ node_modules
 /payload
 /resources.pak
 /v8_context_snapshot.bin
+*.exe
+*.dll
+*.log
+Dictionaries/en-US-9-0.bdic

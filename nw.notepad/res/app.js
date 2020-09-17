@@ -54,12 +54,12 @@ void (function () {
     // 读取目录
     function readBooks() {
         let getBookDir = getPath("book.json")
-        console.log("getBookDir", getBookDir)
+        // console.log("getBookDir", getBookDir)
         let books = []
         try {
             books = require(getBookDir).tree
         } catch (e) {}
-        console.log("books", books)
+        // console.log("books", books)
         return books
     }
 
@@ -144,11 +144,12 @@ void (function () {
         }
     }
 
+    let curNoteText = ""
     function saveNote() {
         let bookId = curBook.id
         let noteId = curNote.id
-        if (bookId && noteId) {
-            let html = WebEdit.getHTML()
+        let html = WebEdit.getHTML()
+        if (bookId && noteId && curNoteText != html) {
             fs.writeFile(getPath(bookId, noteId + ".html"), html, "utf8", function () {})
             // console.log(noteId, curBook)
             if (noteId && curBook.tree.length > 1 && curBook.tree[0] != noteId) {
@@ -162,7 +163,7 @@ void (function () {
 
     function getNote() {
         try {
-            return fs.readFileSync(getPath(curBook.id, curNote.id + ".html"), "utf8")
+            return (curNoteText = fs.readFileSync(getPath(curBook.id, curNote.id + ".html"), "utf8"))
         } catch (e) {}
         return ""
     }
@@ -282,7 +283,6 @@ void (function () {
             }
         },
         createQuickStart() {
-            // console.log(process)
             if (window.confirm("即将创建桌面快捷方式，如果已存在，将覆盖。")) {
                 let dir = process.execPath.replace(/[^\/\\]*$/, "")
                 fs.writeFile(
@@ -364,4 +364,25 @@ Categories=Office;`,
             saveBooks()
         }
     }
+
+    window.document.documentElement.className = (function () {
+        let ug = window.navigator.userAgent
+        let isLinux = /\blinux\b/i.test(ug)
+        // let isWin = /\bwindows\b/i.test(ug)
+        if (isLinux) {
+            return "os-linux"
+        }
+        return ""
+    })()
+    /*
+
+    console.log()
+
+    let fork = require("child_process").fork
+    let child = fork(process.execPath.replace(/[^\/\\]*$/, "") + 'shortcut.vbs /target:"' + process.execPath + '" /shortcut:"' + path.resolve(process.env.USERPROFILE, "桌面", "nw.nptebookpad.lnk") + '"')
+    child.on("error", function () {
+        console.log("err", arguments)
+    })
+    console.log(process.execPath.replace(/[^\/\\]*$/, "") + 'shortcut.vbs /target:"' + process.execPath + '" /shortcut:"' + path.resolve(process.env.USERPROFILE, "桌面", "nw.nptebookpad.lnk") + '"')
+    */
 })()

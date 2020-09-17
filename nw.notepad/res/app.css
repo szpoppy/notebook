@@ -130,7 +130,7 @@ input.full {
     /* padding: 0 0 0 20px; */
     line-height: 20px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
     padding: 4px 10px;
 }
 
@@ -215,6 +215,14 @@ input.full {
     -webkit-app-region: none;
 }
 
+.la-bar .shortcut {
+    display: none;
+}
+
+.os-linux .la-bar .shortcut {
+    display: inline;
+}
+
 .la-bar .bottom .iconfont {
     cursor: pointer;
 }
@@ -278,6 +286,7 @@ input.full {
 .la-tree .tree .li {
     padding: 0 0 0 20px;
     line-height: 20px;
+    font-size: 13px;
 }
 
 .la-tree .tree .con {
@@ -325,7 +334,7 @@ input.full {
     position: absolute;
     left: 328px;
     background-color: #f2f3f5;
-    z-index: 3;
+    z-index: 4;
     /* border-right: 1px solid #dddddd; */
     overflow: auto;
     top: 0;
@@ -396,6 +405,10 @@ a.WebEdit_abtn:hover {
     /* border: solid 1px #999999; */
     /* margin-bottom: -2px; */
     /* margin-right: -2px; */
+}
+
+.WebEdit_Edit thead td .WebEdit_a1:before {
+    content: "\e900";
 }
 
 .WebEdit_Edit thead td .WebEdit_a4:before {
@@ -477,19 +490,23 @@ a.WebEdit_abtn:hover {
     text-decoration: none;
 }
 
+.WebEdit_down-font {
+    margin-left: 0px;
+}
+
 .WebEdit_Color {
-    width: 288px;
+    width: 576PX;
     border: 0px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 1);
+    border-left: 1px solid rgba(0, 0, 0, 1);
     padding: 0px;
 }
 .WebEdit_Color a {
     width: 16px;
     height: 16px;
     float: left;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+    border-right: 1px solid rgba(0, 0, 0, 1);
     overflow: hidden;
     box-sizing: border-box;
     padding: 0;
