@@ -27,7 +27,23 @@
 
 body {
     word-break: break-all;
-    font-size: 14px;
+    font-size: 13px;
     font-family: "PingFang SC",Arial,"Microsoft YaHei",sans-serif;
     color: #333333;
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0 10px 10px 10px;
+    color: #ccc;
+}
+
+ul {
+    list-style: circle;
+}
+
+ul li, ol li {
+    margin: 0 0 0 16px;
+    padding: 2px 0;
+    color: #333;
 }
