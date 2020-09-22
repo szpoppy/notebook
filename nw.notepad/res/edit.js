@@ -3,27 +3,27 @@ void (function () {
     let $ = function (cot) {
         return typeof cot == "string" ? document.getElementById(cot) : cot
     }
-
-    let safeColors = "0369cf".split("")
-
     function getColorLi(format, c) {
         return '<a href="javascript:;" title="#' + c + '" v-click="format,' + format + ",#" + c + '" style="background-color:#' + c + '"></a>'
     }
 
+    let colorHash = `
+    FFFFFF#000000#EEECE0#1C487F#4D80BF#C24F4A#642422#4F6324#46ACC8#F9963B
+    F2F2F2#808080#DDD9C2#C5D9F2#DCE6F3#F3DCDB#EBF1DD#E6E0EC#DAEEF4#FEEAD9
+    D9D9d9#595959#C4BE95#8DB3E5#B8CDE6#E7B9B7#D7E5BB#CCC0DB#B6DEE9#FDD5B3
+    BFBFBF#404040#948B50#528CD8#94B2D9#DA9693#C3D798#B3A1C8#91CDDE#FBC08C
+    A6A6A6#262626#4A4528#15365F#355F94#973632#769436#60487C#2C859D#E66C00
+    808080#0d0d0d#1E1C10#0F2340#243F62#642422#4F6324#403053#1E5969#994800
+    DF402A#F77567#FAD4D3#FAE220#B19067#77C94B#98DEDE#184E87#9896A4#90A7D1
+    `
+
     function getColors(format) {
+        let cs = colorHash.trim().split(/[#\s]+/)
         let rv = []
-        for (let i = 0; i < 256; i += 7.4) {
-            let c = ("0" + Math.round(i).toString(16)).slice(-2)
-            rv.push(getColorLi(format, c + c + c))
-        }
-        rv.push(getColorLi(format, "fff"))
-        safeColors.forEach(function (r) {
-            safeColors.forEach(function (g) {
-                safeColors.forEach(function (b) {
-                    rv.push(getColorLi(format, r + g + b))
-                })
-            })
+        cs.forEach(function (c) {
+            rv.push(getColorLi(format, c))
         })
+        // console.log(rv)
         return rv.join("")
     }
 
@@ -84,6 +84,13 @@ void (function () {
             //window obblur
             //FF
             this.iframeWin.addEventListener("click", WebEdit.close, false)
+
+            ;["foreColor", "backColor"].forEach(function (type) {
+                let c = window.localStorage.getItem("foramt:" + type)
+                if (c) {
+                    $("WebEdit.Deploy." + type).style.color = c
+                }
+            })
         },
         showCot: null,
         show: function (id) {
@@ -109,6 +116,18 @@ void (function () {
         },
         format: function (type, para) {
             this.iframe.focus()
+            if (type == "foreColor" || type == "backColor") {
+                if (para) {
+                    $("WebEdit.Deploy." + type).style.color = para
+                    window.localStorage.setItem("foramt:" + type, para)
+                } else {
+                    para = window.localStorage.getItem("foramt:" + type)
+                }
+
+                if (!para) {
+                    return
+                }
+            }
             if (!para) {
                 this.iframe.document.execCommand(type, false, false)
             } else {
@@ -158,8 +177,8 @@ void (function () {
         Insertunorderedlist: '<a v-click="format,Insertunorderedlist,1" v-mouseover="show,Insertunorderedlist" id="WebEdit.Deploy.Insertunorderedlist" hidefocus="true" title="项目编号" href="javascript:;" class="WebEdit_abtn WebEdit_a12"></a>',
         Indent: '<a v-click="format,Indent,1" v-mouseover="show,Indent" id="WebEdit.Deploy.Outdent" hidefocus="true" title="增加缩进" href="javascript:;" class="WebEdit_abtn WebEdit_a13"></a>',
         Outdent: '<a v-click="format,Outdent,1" v-mouseover="show,Outdent" id="WebEdit.Deploy.Indent" hidefocus="true" title="减少缩进" href="javascript:;" class="WebEdit_abtn WebEdit_a14"></a>',
-        foreColor: ['<a v-mouseover="show,foreColor" id="WebEdit.Deploy.foreColor" hidefocus="true" title="字体颜色" href="javascript:;" class="WebEdit_abtn WebEdit_a15"></a>', '<div id="WebEdit.Down.foreColor" class="WebEdit_down WebEdit_Color" v-mouseleave="close">', getColors("foreColor"), "</div>"].join(""),
-        backColor: ['<a v-mouseover="show,backColor" id="WebEdit.Deploy.backColor" hidefocus="true" title="背景颜色" href="javascript:;" class="WebEdit_abtn WebEdit_a16"></a>', '<div id="WebEdit.Down.backColor" class="WebEdit_down WebEdit_Color" v-mouseleave="close">', getColors("backColor"), "</div>"].join(""),
+        foreColor: ['<a v-mouseover="show,foreColor" v-click="format,foreColor," id="WebEdit.Deploy.foreColor" hidefocus="true" title="字体颜色" href="javascript:;" class="WebEdit_abtn WebEdit_a15"></a>', '<div id="WebEdit.Down.foreColor" class="WebEdit_down WebEdit_Color" v-mouseleave="close">', getColors("foreColor"), "</div>"].join(""),
+        backColor: ['<a v-mouseover="show,backColor" v-click="format,backColor," id="WebEdit.Deploy.backColor" hidefocus="true" title="背景颜色" href="javascript:;" class="WebEdit_abtn WebEdit_a16"></a>', '<div id="WebEdit.Down.backColor" class="WebEdit_down WebEdit_Color" v-mouseleave="close">', getColors("backColor"), "</div>"].join(""),
         CreateLink: ['<a v-click="createLink" v-mouseover="show,CreateLink" id="WebEdit.Deploy.CreateLink" hidefocus="true" title="增加连接" href="javascript:;" class="WebEdit_abtn WebEdit_a17"></a>'].join(""),
         CreateImg: ['<a v-click="createImg" v-mouseover="show,CreateImg" id="WebEdit.Deploy.CreateImg" hidefocus="true" title="增加图片" href="javascript:;" class="WebEdit_abtn WebEdit_a18"></a>'].join(""),
         "-": ['</td></tr><tr><td nowrap="nowrap">'].join("")

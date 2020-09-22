@@ -470,8 +470,8 @@ a.WebEdit_abtn:hover {
 .WebEdit_down {
     position: absolute;
     display: none;
-    margin-top: -3px;
-    margin-left: -30px;
+    margin-top: 0;
+    margin-left: 0;
     padding: 3px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: #f2f3f5;
@@ -495,18 +495,18 @@ a.WebEdit_abtn:hover {
 }
 
 .WebEdit_Color {
-    width: 576PX;
+    width: 200px;
     border: 0px;
-    border-top: 1px solid rgba(0, 0, 0, 1);
-    border-left: 1px solid rgba(0, 0, 0, 1);
+    border-top: 3px solid #f2f3f5;
+    border-left: 3px solid #f2f3f5;
     padding: 0px;
 }
 .WebEdit_Color a {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     float: left;
-    border-bottom: 1px solid rgba(0, 0, 0, 1);
-    border-right: 1px solid rgba(0, 0, 0, 1);
+    border-bottom: 3px solid #f2f3f5;
+    border-right: 3px solid #f2f3f5;
     overflow: hidden;
     box-sizing: border-box;
     padding: 0;
