@@ -156,7 +156,7 @@ void (function () {
                 let index = curBook.tree.indexOf(noteId)
                 curBook.tree.unshift(...curBook.tree.splice(index, 1))
                 saveCurBook()
-                reSetBookTree()
+                // reSetBookTree()
             }
         }
     }
@@ -188,6 +188,7 @@ void (function () {
     }
 
     function electNote(id) {
+        saveNote()
         let cur = $("book.tree.li." + curNote.id)
         if (cur) {
             cur.className = "li"
@@ -202,6 +203,7 @@ void (function () {
         // console.log("curNote", curNote, id)
         $("note.title").value = curNote.title
         WebEdit.setHTML(getNote())
+
     }
 
     let ppEventFn = {

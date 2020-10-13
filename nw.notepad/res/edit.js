@@ -39,7 +39,7 @@ void (function () {
     }
 
     Object.assign(WebEdit, {
-        defDeploys: ["Clean", "fontsize", "Bold", "Italic", "Underline", "Justifyleft", "Justifycenter", "Justifyright", "Insertorderedlist", "Insertunorderedlist", "Outdent", "Indent", "foreColor", "backColor", "|"],
+        defDeploys: ["Clean", "fontsize", "Bold", "Italic", "Underline", "StrikeThrough", "Justifyleft", "Justifycenter", "Justifyright", "Insertorderedlist", "Insertunorderedlist", "Outdent", "Indent", "foreColor", "backColor", "|"],
         renderTo: function (cot, deploys) {
             this.deploys = deploys || this.defDeploys
             let htmls = ['<table cellpadding="0" cellspacing="0" width="100%" class="WebEdit_Edit">', "<thead>", "<tr>", '<td nowrap="nowrap"><div class="WebEdit_empty1"></div>']
@@ -170,6 +170,7 @@ void (function () {
         Bold: '<a v-click="format,Bold,1" v-mouseover="show,Bold" id="WebEdit.Deploy.Bold" hidefocus="true" title="加粗" href="javascript:;" class="WebEdit_abtn WebEdit_a5"></a>',
         Italic: '<a v-click="format,Italic,1" v-mouseover="show,Italic" id="WebEdit.Deploy.Italic" hidefocus="true" title="斜体" href="javascript:;" class="WebEdit_abtn WebEdit_a6"></a>',
         Underline: '<a v-click="format,Underline,1" v-mouseover="show,Underline" id="WebEdit.Deploy.Underline" hidefocus="true" title="下划线" href="javascript:;" class="WebEdit_abtn WebEdit_a7"></a>',
+        StrikeThrough: '<a v-click="format,StrikeThrough,1" v-mouseover="show,StrikeThrough" id="WebEdit.Deploy.StrikeThrough" hidefocus="true" title="删除划线" href="javascript:;" class="WebEdit_abtn WebEdit_a20"></a>',
         Justifyleft: '<a v-click="format,Justifyleft,1" v-mouseover="show,Justifyleft" id="WebEdit.Deploy.Justifyleft" hidefocus="true" title="左对齐" href="javascript:;" class="WebEdit_abtn WebEdit_a8"></a>',
         Justifycenter: '<a v-click="format,Justifycenter,1" ov-mouseover="show,Justifycenter" id="WebEdit.Deploy.Justifycenter" hidefocus="true" title="居中对齐" href="javascript:;" class="WebEdit_abtn WebEdit_a9"></a>',
         Justifyright: '<a v-click="format,Justifyright,1" v-mouseover="show,Justifyright" id="WebEdit.Deploy.Justifyright" hidefocus="true" title="右对齐" href="javascript:;" class="WebEdit_abtn WebEdit_a10"></a>',

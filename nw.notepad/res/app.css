@@ -26,7 +26,7 @@ input.full {
     line-height: normal;
     font-weight: 600;
     outline: none;
-    background-color: #f2f3f5;
+    background-color: transparent;
 }
 
 .context {
@@ -333,7 +333,7 @@ input.full {
 .la-block {
     position: absolute;
     left: 328px;
-    background-color: #f2f3f5;
+    background-color: #ffffff;
     z-index: 4;
     /* border-right: 1px solid #dddddd; */
     overflow: auto;
@@ -366,6 +366,7 @@ input.full {
 .WebEdit_Edit {
     border-collapse: collapse;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .WebEdit_empty1 {
@@ -375,6 +376,7 @@ input.full {
 }
 
 .WebEdit_Edit td {
+    
 }
 .WebEdit_Edit thead td {
     height: 31px;
@@ -459,6 +461,9 @@ a.WebEdit_abtn:hover {
 .WebEdit_Edit thead td .WebEdit_a19:before {
     content: "\f033";
 }
+.WebEdit_Edit thead td .WebEdit_a20:before {
+    content: "\e805";
+}
 .WebEdit_Edit thead td .WebEdit_split {
     display: block;
     width: 10px;
@@ -540,7 +545,7 @@ a.WebEdit_abtn:hover {
     margin: 0px;
     /* height: 280px; */
     width: 100%;
-    height: 100%;
+    height: 99.5%;
     /* border-bottom: 1px solid #dddddd; */
     background-color: #ffffff;
 }
