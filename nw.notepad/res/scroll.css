@@ -27,8 +27,9 @@
 
 body {
     word-break: break-all;
-    font-size: 13px;
-    font-family: "PingFang SC",Arial,"Microsoft YaHei",sans-serif;
+    font-size: 14px;
+    /* font-family: "PingFang SC",Arial,"Microsoft YaHei",sans-serif; */
+    font-family: Lato, sans-serif, "Microsoft YaHei";
     color: #333333;
 }
 
