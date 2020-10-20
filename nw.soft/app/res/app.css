@@ -370,7 +370,6 @@ input.full {
 }
 
 .WebEdit_Edit td {
-    
 }
 .WebEdit_Edit thead td {
     height: 31px;
@@ -464,6 +463,9 @@ a.WebEdit_abtn:hover {
 .WebEdit_Edit thead td .WebEdit_a22:before {
     content: "\e7a8";
 }
+.WebEdit_Edit thead td .WebEdit_a23:before {
+    content: "\e783";
+}
 .WebEdit_Edit thead td .WebEdit_split {
     display: block;
     width: 10px;
@@ -524,6 +526,27 @@ a.WebEdit_abtn:hover {
     /* border: solid 1px #F2F3F5; */
     /* margin-left: -1px;
     margin-top: -1px; */
+}
+
+.WebEdit_Emoji {
+    width: 300px;
+    border: 0px;
+    padding: 0px;
+}
+
+.WebEdit_Emoji a {
+    width: 30px;
+    height: 30px;
+    float: left;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    /* display: flex;
+    justify-items: center;
+    align-items: center; */
 }
 
 .WebEdit_InsertFace {

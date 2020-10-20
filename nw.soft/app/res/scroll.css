@@ -67,11 +67,10 @@ hr {
     position: relative;
     padding-left: 20px;
     line-height: 22px;
-    cursor: pointer;
 }
 
-.checked {
-    text-decoration: line-through;
+.checked-line {
+    color: #999999;
 }
 
 .check-line:before,
@@ -82,7 +81,7 @@ hr {
     position: absolute;
     font-size: 16px;
     left: 0;
-    top: 0px;
+    top: 0;
 }
 
 .check-line:before {
@@ -94,17 +93,8 @@ hr {
     content: "\e7a8";
 }
 
-.check-line s,
-.checked-line s {
-    display: inline-block;
-    width: 100%;
-    cursor: auto;
-}
-
-.check-line s {
-    text-decoration: none;
-}
-
-.checked-line s {
-    color: #999999;
+.hr-empty {
+    border: none;
+    margin: 0;
+    padding: 12px;
 }

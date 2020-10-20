@@ -27,6 +27,16 @@ void (function () {
         return rv.join("")
     }
 
+    let emojis = "😀,😃,😄,😁,😆,😅,😂,😇,🤩,🤑,✨,⭐,💫,🌟,🌠,✔️,🗡️,⚔️,🛡️,🔰,🧡,🕴️,🧗,⛷️,🚴,🚩,🔥,💕,💯,♈,♉,♊,♋,♌,♍,♎,♏,♐,♑,♒,♓,💌,💣,🛀,⏰,📙,📅,📈,💢,💦,💤,👁️,🐳,🐬,🐟,🐠,🌸,🌲,🍃,🍀,☘️,🏝️,🚝,🛰️,☁️,⚡".split(",")
+    function getEmoji() {
+        let ems = []
+        for (let i = 0; i < emojis.length; i += 1) {
+            let k = emojis[i]
+            ems.push('<a href="javascript:;" v-click="format,InsertText,' + k + '">' + k + '</a>')
+        }
+        return ems.join("")
+    }
+
     function callFuns() {
         let key = Array.prototype.shift.call(arguments)
         WebEdit[key].apply(WebEdit, arguments)
@@ -39,11 +49,11 @@ void (function () {
     }
 
     let InsertHtmlFn = {
-        check: "<div class=\"check-line\" onclick=\"this.className = this.className == 'checked-line' ? 'check-line':'checked-line'\"><s onclick=\"event.stoppropagation()\">内容</s></div>"
+        check: '<div class="check-line" onclick="WFn.checkToggle(this, event)">内容</div>'
     }
 
     Object.assign(WebEdit, {
-        defDeploys: ["Clean", "check", "fontsize", "Bold", "Italic", "Underline", "StrikeThrough", "hr", "Justifyleft", "Justifycenter", "Justifyright", "Insertorderedlist", "Insertunorderedlist", "Outdent", "Indent", "foreColor", "backColor", "|"],
+        defDeploys: ["Clean", "check", "fontsize", "Bold", "Italic", "Underline", "StrikeThrough", "hr", "Justifyleft", "Justifycenter", "Justifyright", "Insertorderedlist", "Insertunorderedlist", "Outdent", "Indent", "emoji", "foreColor", "backColor"],
         renderTo: function (cot, deploys) {
             this.deploys = deploys || this.defDeploys
             let htmls = ['<table cellpadding="0" cellspacing="0" width="100%" class="WebEdit_Edit">', "<thead>", "<tr>", '<td nowrap="nowrap"><div class="WebEdit_empty1"></div>']
@@ -80,10 +90,16 @@ void (function () {
                 }
             }
 
-            this.iframe = window.frames["WebEdit_HTMLEdit"]
-            this.iframe.document.designMode = "on"
-            this.iframe.document.getElementsByTagName("head")[0].innerHTML = '<link href="./res/scroll.css" rel="stylesheet" type="text/css" />'
-
+            let iframe = (this.iframe = window.frames["WebEdit_HTMLEdit"])
+            iframe.document.designMode = "on"
+            let iHead = iframe.document.getElementsByTagName("head")[0]
+            iHead.innerHTML = '<link href="./res/scroll.css" rel="stylesheet" type="text/css" />'
+            let $s = document.createElement("script")
+            $s.setAttribute("src", "./res/iframe.js")
+            iHead.appendChild($s)
+            // this.iframe.eval(`
+            //     let $s = docu
+            // `)
             this.iframeWin = $("WebEdit_HTMLEdit").contentWindow
             //window obblur
             //FF
@@ -92,6 +108,12 @@ void (function () {
                 let c = window.localStorage.getItem("foramt:" + type)
                 if (c) {
                     $("WebEdit.Deploy." + type).style.color = c
+                }
+            })
+
+            iframe.document.body.addEventListener("keypress", function (event) {
+                if (event.ctrlKey && event.key == "Enter") {
+                    iframe.document.execCommand("InsertHtml", false, '<hr class="hr-empty" />')
                 }
             })
         },
@@ -190,6 +212,7 @@ void (function () {
         Outdent: '<a v-click="format,Outdent,1" v-mouseover="show,Outdent" id="WebEdit.Deploy.Indent" hidefocus="true" title="减少缩进" href="javascript:;" class="WebEdit_abtn WebEdit_a14"></a>',
         foreColor: ['<a v-mouseover="show,foreColor" v-click="format,foreColor," id="WebEdit.Deploy.foreColor" hidefocus="true" title="字体颜色" href="javascript:;" class="WebEdit_abtn WebEdit_a15"></a>', '<div id="WebEdit.Down.foreColor" class="WebEdit_down WebEdit_Color" v-mouseleave="close">', getColors("foreColor"), "</div>"].join(""),
         backColor: ['<a v-mouseover="show,backColor" v-click="format,backColor," id="WebEdit.Deploy.backColor" hidefocus="true" title="背景颜色" href="javascript:;" class="WebEdit_abtn WebEdit_a16"></a>', '<div id="WebEdit.Down.backColor" class="WebEdit_down WebEdit_Color" v-mouseleave="close">', getColors("backColor"), "</div>"].join(""),
+        emoji: ['<a v-mouseover="show,emoji" id="WebEdit.Deploy.emoji" hidefocus="true" title="emoji" href="javascript:;" class="WebEdit_abtn WebEdit_a23"></a>', '<div id="WebEdit.Down.emoji" class="WebEdit_down WebEdit_Emoji" v-mouseleave="close">', getEmoji(), "</div>"].join(""),
         CreateLink: ['<a v-click="createLink" v-mouseover="show,CreateLink" id="WebEdit.Deploy.CreateLink" hidefocus="true" title="增加连接" href="javascript:;" class="WebEdit_abtn WebEdit_a17"></a>'].join(""),
         CreateImg: ['<a v-click="createImg" v-mouseover="show,CreateImg" id="WebEdit.Deploy.CreateImg" hidefocus="true" title="增加图片" href="javascript:;" class="WebEdit_abtn WebEdit_a18"></a>'].join(""),
         "-": ['</td></tr><tr><td nowrap="nowrap">'].join("")
