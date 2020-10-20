@@ -1,9 +1,3 @@
-@font-face {
-    font-family: "iconfont";
-    src: url("fonts/iconfont.eot");
-    src: url("fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("fonts/iconfont.woff") format("woff"), url("fonts/iconfont.ttf") format("truetype"), url("fonts/iconfont.svg#iconfont") format("svg");
-}
-
 html,
 body {
     background: transparent;
@@ -463,6 +457,12 @@ a.WebEdit_abtn:hover {
 }
 .WebEdit_Edit thead td .WebEdit_a20:before {
     content: "\e805";
+}
+.WebEdit_Edit thead td .WebEdit_a21:before {
+    content: "\e806";
+}
+.WebEdit_Edit thead td .WebEdit_a22:before {
+    content: "\e7a8";
 }
 .WebEdit_Edit thead td .WebEdit_split {
     display: block;

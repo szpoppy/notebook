@@ -38,8 +38,12 @@ void (function () {
         }
     }
 
+    let InsertHtmlFn = {
+        check: "<div class=\"check-line\" onclick=\"this.className = this.className == 'checked-line' ? 'check-line':'checked-line'\"><s onclick=\"event.stoppropagation()\">内容</s></div>"
+    }
+
     Object.assign(WebEdit, {
-        defDeploys: ["Clean", "fontsize", "Bold", "Italic", "Underline", "StrikeThrough", "Justifyleft", "Justifycenter", "Justifyright", "Insertorderedlist", "Insertunorderedlist", "Outdent", "Indent", "foreColor", "backColor", "|"],
+        defDeploys: ["Clean", "check", "fontsize", "Bold", "Italic", "Underline", "StrikeThrough", "hr", "Justifyleft", "Justifycenter", "Justifyright", "Insertorderedlist", "Insertunorderedlist", "Outdent", "Indent", "foreColor", "backColor", "|"],
         renderTo: function (cot, deploys) {
             this.deploys = deploys || this.defDeploys
             let htmls = ['<table cellpadding="0" cellspacing="0" width="100%" class="WebEdit_Edit">', "<thead>", "<tr>", '<td nowrap="nowrap"><div class="WebEdit_empty1"></div>']
@@ -84,7 +88,6 @@ void (function () {
             //window obblur
             //FF
             this.iframeWin.addEventListener("click", WebEdit.close, false)
-
             ;["foreColor", "backColor"].forEach(function (type) {
                 let c = window.localStorage.getItem("foramt:" + type)
                 if (c) {
@@ -128,6 +131,11 @@ void (function () {
                     return
                 }
             }
+
+            if (type == "InsertHtml" && InsertHtmlFn[para]) {
+                para = InsertHtmlFn[para]
+            }
+
             if (!para) {
                 this.iframe.document.execCommand(type, false, false)
             } else {
@@ -165,6 +173,8 @@ void (function () {
     })
 
     WebEdit.htmlDeploys = {
+        check: ['<a v-click="format,InsertHtml,check" v-mouseover="show,check" id="WebEdit.Deploy.check" hidefocus="true" title="选中" href="javascript:;" class="WebEdit_abtn WebEdit_a22"></a>'],
+        hr: ['<a v-click="format,InsertHtml,<hr />" v-mouseover="show,hr" id="WebEdit.Deploy.hr" hidefocus="true" title="分隔符" href="javascript:;" class="WebEdit_abtn WebEdit_a21"></a>'],
         Clean: ['<a v-click="format,removeFormat" v-mouseover="show,Clean" id="WebEdit.Deploy.Clean" hidefocus="true" title="清理格式" href="javascript:;" class="WebEdit_abtn WebEdit_a1"></a>'],
         fontsize: ['<a v-mouseover="show,fontsize" id="WebEdit.Deploy.fontsize" hidefocus="true" title="字号" href="javascript:;" class="WebEdit_abtn WebEdit_a4"></a>', '<div id="WebEdit.Down.fontsize" class="WebEdit_down WebEdit_down-font" v-mouseleave="close">', '<A v-click="format,fontsize,1" href="javascript:;" style="line-height: 120%; font-size: xx-small;">极小</A>', '<A v-click="format,fontsize,2" href="javascript:;" style="line-height: 120%; font-size: x-small;">特小</A>', '<A v-click="format,fontsize,3" href="javascript:;" style="line-height: 120%; font-size: small;">小</A>', '<A v-click="format,fontsize,4" href="javascript:;" style="line-height: 120%; font-size: medium;">中</A>', '<A v-click="format,fontsize,5" href="javascript:;" style="line-height: 120%; font-size: large;">大</A>', '<A v-click="format,fontsize,6" href="javascript:;" style="line-height: 120%; font-size: x-large;">特大</A>', '<A v-click="format,fontsize,7" href="javascript:;" style="line-height: 120%; font-size: xx-large;">极大</A>', "</div>"].join(""),
         Bold: '<a v-click="format,Bold,1" v-mouseover="show,Bold" id="WebEdit.Deploy.Bold" hidefocus="true" title="加粗" href="javascript:;" class="WebEdit_abtn WebEdit_a5"></a>',

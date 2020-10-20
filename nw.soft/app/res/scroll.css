@@ -25,6 +25,12 @@
     background: rgba(54, 108, 179, 0.2);
 }
 
+@font-face {
+    font-family: "iconfont";
+    src: url("fonts/iconfont.eot");
+    src: url("fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("fonts/iconfont.woff") format("woff"), url("fonts/iconfont.ttf") format("truetype"), url("fonts/iconfont.svg#iconfont") format("svg");
+}
+
 body {
     word-break: break-all;
     font-size: 14px;
@@ -33,7 +39,8 @@ body {
     color: #333333;
 }
 
-ul, ol {
+ul,
+ol {
     margin: 0;
     padding: 0 10px 10px 10px;
     color: #ccc;
@@ -43,8 +50,61 @@ ul {
     list-style: circle;
 }
 
-ul li, ol li {
+ul li,
+ol li {
     margin: 0 0 0 16px;
     padding: 2px 0;
     color: #333;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #cccccc;
+}
+
+.check-line,
+.checked-line {
+    position: relative;
+    padding-left: 20px;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+.check-line:before,
+.checked-line:before {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    left: 0;
+    top: 0px;
+}
+
+.check-line:before {
+    content: "\e7a9";
+}
+
+.checked-line:before {
+    font-size: 17px;
+    content: "\e7a8";
+}
+
+.check-line s,
+.checked-line s {
+    display: inline-block;
+    width: 100%;
+    cursor: auto;
+}
+
+.check-line s {
+    text-decoration: none;
+}
+
+.checked-line s {
+    color: #999999;
 }
