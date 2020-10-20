@@ -19,7 +19,7 @@ void (function () {
     const fs = require("fs")
     const path = require("path")
 
-    const rootDir = process.execPath.replace(/[^\/\\]*$/, "nw.data")
+    const rootDir = process.execPath.replace(/[^\/\\]+[\/\\][^\/\\]*$/, "data")
 
     function getPath(...arg) {
         // console.log("arg", arg)
