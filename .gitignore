@@ -1,3 +1,5 @@
 node_modules
 nw.soft/*
 !nw.soft/app/
+!nw.soft/package.json
+!nw.soft/icon.svg
