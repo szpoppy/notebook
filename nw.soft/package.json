@@ -4,10 +4,10 @@
   "main": "./app/index.html",
   "window": {
     "frame": false,
-    "transparent": true,
+    "transparent": false,
     "width": 1440,
     "height": 900,
     "position": "center",
-    "icon": "./icon.svg"
+    "icon": "./icon.png"
   }
 }

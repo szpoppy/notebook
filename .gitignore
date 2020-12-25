@@ -1,5 +1,9 @@
 node_modules
+nw.lib
+nw.mac/*
 nw.soft/*
 !nw.soft/app/
 !nw.soft/package.json
 !nw.soft/icon.svg
+!nw.soft/icon.ico
+!nw.soft/icon.icns

@@ -34,9 +34,8 @@ input.full {
     background-color: #f2f3f5;
     overflow: visible;
     font-size: 12px;
-    border-radius: 4px;
     box-sizing: border-box;
-    /* border: 1px solid #dddddd; */
+    border: 1px solid #366cb3;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
